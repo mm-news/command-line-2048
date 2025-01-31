@@ -13,14 +13,14 @@ class Field:
             ret += "\n\n"
         return ret
 
-    def edit_field(self, x, y, value):
-        self.field[x][y] = value
+    def edit_field(self, r, c, value):
+        self.field[r][c] = value
 
     def get_field(self):
         return self.field
 
-    def get_field_value(self, x, y):
-        return self.field[x][y]
+    def get_field_value(self, r, c, zero_based=True):
+        return self.field[r][c] if zero_based else self.field[r - 1][c - 1]
 
     def __eq__(self, value):
         return self.field == value.field
