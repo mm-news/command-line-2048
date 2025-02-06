@@ -2,12 +2,15 @@ import curses
 
 
 def g(stdscr: curses.window):
-    from app import field
-    from app import worker
+    from app import field, worker
+
     stdscr.clear()
     stdscr.keypad(True)
 
     field = worker.init_field(field)
+
+    stdscr.addstr(0, 0, field.__repr__())
+    stdscr.refresh()
 
     while True:
         key = stdscr.getch()
@@ -15,22 +18,26 @@ def g(stdscr: curses.window):
         if key == curses.KEY_UP:
             # Move up
             stdscr.clear()
-            stdscr.addstr(0, 0, "UP")
+            field.move_up()
+            stdscr.addstr(0, 0, field.__repr__())
         elif key == curses.KEY_DOWN:
             # Move down
             stdscr.clear()
-            stdscr.addstr(0, 0, "DOWN")
+            field.move_down()
+            stdscr.addstr(0, 0, field.__repr__())
         elif key == curses.KEY_LEFT:
             # Move left
             stdscr.clear()
-            stdscr.addstr(0, 0, "LEFT")
+            field.move_left()
+            stdscr.addstr(0, 0, field.__repr__())
         elif key == curses.KEY_RIGHT:
             # Move right
             stdscr.clear()
-            stdscr.addstr(0, 0, "RIGHT")
+            field.move_right()
+            stdscr.addstr(0, 0, field.__repr__())
         elif key == ord("q"):
             # Quit
             stdscr.clear()
-            stdscr.addstr(0, 0, "QUIT")
+            stdscr.addstr(0, 0, field.__repr__())
             break
         stdscr.refresh()
